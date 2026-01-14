@@ -1,0 +1,38 @@
+
+n =====
+__pycache__/
+
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+
+# ===== 虚拟环境 =====
+venv/
+env/
+.hpdp/
+(hpdp)/
+
+# ===== 日志 & 缓存 =====
+*.log
+logs/
+tmp/
+cache/
+
+# ===== 数据 / 模型（很重要）=====
+
+checkpoints/
+models/
+*.pt
+*.pth
+*.ckpt
+*.h5
+
+# ===== 系统文件 =====
+.DS_Store
+Thumbs.db
+
+# ===== 编辑器 =====
+.vscode/
+.idea/
+
