@@ -53,7 +53,7 @@ Due to copyright restrictions, I am unable to provide the raw files of of real-w
    - Round it to the nearest integer.
    - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
 
-
+---
 ### **NY Salary**
 
 **Access**
@@ -78,7 +78,7 @@ Due to copyright restrictions, I am unable to provide the raw files of of real-w
    - Round it to the nearest integer.
    - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
 
-
+---
 
 ### **VLE**
 
@@ -99,6 +99,8 @@ Due to copyright restrictions, I am unable to provide the raw files of of real-w
    - Take the **`sum_click`** field as `value`.
    - Round it to the nearest integer.
    - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+---
 
 ### **Online Retail**
 
@@ -123,6 +125,7 @@ Due to copyright restrictions, I am unable to provide the raw files of of real-w
    - Round the result to the nearest integer.
    - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
 
+---
 
 ### **Czech Bank**
 
@@ -143,6 +146,8 @@ Due to copyright restrictions, I am unable to provide the raw files of of real-w
    - Take the **`amount`** field as `value`.
    - Round it to the nearest integer.
    - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+---
 
 ### **TPCH (Orders + Lineitem)**
 
@@ -166,12 +171,12 @@ make
    - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
 
 2. **user_id**
-   - User key: **Customer = `O_CUSTKEY`**
+   - User key: **`O_CUSTKEY`**
    - Reassign `user_id` starting from **1**, increasing sequentially across unique `O_CUSTKEY` values.
    - Rows with the same `O_CUSTKEY` share the same `user_id`.
 
 3. **value**
-   - Value field: **Total Price = `O_TOTALPRICE`**
+   - Value field: **`O_TOTALPRICE`**
    - Round to the nearest integer.
    - Truncate the result so that the minimum value is **0**.
 
@@ -185,12 +190,12 @@ make
    - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
 
 2. **user_id**
-   - User key: **Supplier = `L_SUPPKEY`**
+   - User key: **`L_SUPPKEY`**
    - Reassign `user_id` starting from **1**, increasing sequentially across unique `L_SUPPKEY` values.
    - Rows with the same `L_SUPPKEY` share the same `user_id`.
 
 3. **value**
-   - Value field: **Extended Price = `L_EXTENDEDPRICE`**
+   - Value field: **`L_EXTENDEDPRICE`**
    - Round to the nearest integer.
    - Truncate the result so that the minimum value is **0**.
 
