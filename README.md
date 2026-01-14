@@ -30,6 +30,174 @@ conda activate hpdp
 pip install -r requirements.txt
 ```
 ---
+## Dataset Acquisition and Preprocessing
+Due to copyright restrictions, I am unable to provide the raw files of of real-world dataset. However, I will provide the access link as well as the preprocessing procedures. Each dataset have 3 columns named `record_id`, `user_id` and `value`.
+
+### **CK Pay**
+
+**Access**
+- Download the dataset from: https://catalog.data.gov/dataset/employee-payroll
+- Use the file **Employee_Payroll.csv**
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - Group rows by the combination of **`Bureau`** and **`Employee identify`**.
+   - Assign the same `user_id` to rows where both fields have identical values.
+   - `user_id` should start from **1** and increase sequentially across unique `(Bureau, Employee identify)` pairs.
+
+3. **value**
+   - Take the **`Base pay`** field.
+   - Round it to the nearest integer.
+   - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+
+### **NY Salary**
+
+**Access**
+- Download the dataset from: https://catalog.data.gov/dataset/salary-information-for-state-authorities
+- Use the file **Salary_Information_for_State_Authorities.csv**
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - Group rows by the combination of the following four fields:
+     - **`Authority Name`**
+     - **`Last Name`**
+     - **`Middle Initial`**
+     - **`First Name`**
+   - Assign the same `user_id` to rows where all four fields have identical values.
+   - `user_id` should start from **1** and increase sequentially across unique combinations of these fields.
+
+3. **value**
+   - Take the **salary** field.
+   - Round it to the nearest integer.
+   - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+
+
+### **VLE**
+
+**Access**
+- Download the dataset from: https://archive.ics.uci.edu/dataset/349/open+university+learning+analytics+dataset
+- Use the file **studentVle.csv**
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - Use the **`id_student`** field to define users.
+   - Reassign `user_id` starting from **1**, increasing sequentially across unique `id_student` values.
+   - Rows with the same `id_student` must share the same `user_id`.
+
+3. **value**
+   - Take the **`sum_click`** field as `value`.
+   - Round it to the nearest integer.
+   - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+### **Online Retail**
+
+**Access**
+- Download the dataset from: https://www.kaggle.com/datasets/tunguz/online-retail
+- Use the file **Online_Retail.csv**
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - Use the **`InvoiceNo`** field to define users.
+   - Reassign `user_id` starting from **1**, increasing sequentially across unique `InvoiceNo` values.
+   - Rows with the same `InvoiceNo` must share the same `user_id`.
+
+3. **value**
+   - Compute `value` as:
+     ```
+     Quantity × UnitPrice
+     ```
+   - Round the result to the nearest integer.
+   - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+
+### **Czech Bank**
+
+**Access**
+- Download the dataset from: https://www.kaggle.com/datasets/marceloventura/the-berka-dataset
+- Use the file **trans_comma.csv**
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - Use the **`account_id`** field to define users.
+   - Reassign `user_id` starting from **1**, increasing sequentially across unique `account_id` values.
+   - Rows with the same `account_id` must share the same `user_id`.
+
+3. **value**
+   - Take the **`amount`** field as `value`.
+   - Round it to the nearest integer.
+   - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+### **TPCH (Orders + Lineitem)**
+
+**Access (SF=1)**
+- Download TPC-H tools: https://www.tpc.org/tpch/
+- Generate data (SF=1):
+
+```bash
+cd <tpch-tools>/dbgen
+cp makefile.suite makefile
+make
+./dbgen -s 1 -T O   # orders.tbl
+./dbgen -s 1 -T L   # lineitem.tbl
+
+#### **TPCH Order**
+- Use the file `orders.tbl`
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - User key: **Customer = `O_CUSTKEY`**
+   - Reassign `user_id` starting from **1**, increasing sequentially across unique `O_CUSTKEY` values.
+   - Rows with the same `O_CUSTKEY` share the same `user_id`.
+
+3. **value**
+   - Value field: **Total Price = `O_TOTALPRICE`**
+   - Round to the nearest integer.
+   - Truncate the result so that the minimum value is **0**.
+
+---
+
+#### **TPCH Lineitem**
+- Use the file `lineitem.tbl`
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - User key: **Supplier = `L_SUPPKEY`**
+   - Reassign `user_id` starting from **1**, increasing sequentially across unique `L_SUPPKEY` values.
+   - Rows with the same `L_SUPPKEY` share the same `user_id`.
+
+3. **value**
+   - Value field: **Extended Price = `L_EXTENDEDPRICE`**
+   - Round to the nearest integer.
+   - Truncate the result so that the minimum value is **0**.
+
+
+
+
+
+---
 
 ## Reprodue the Experiments
 This script generates a synthetic dataset with configurable scale parameters: record values are sampled from a Gaussian distribution, and the number of records per user is sampled from a Poisson distribution.
