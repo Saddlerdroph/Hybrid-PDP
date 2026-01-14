@@ -358,7 +358,7 @@ This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation*
 - **`-r, --rounds`**: Number of times to run  `DT.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
-- **`-tau, --tau`**: The **τ (tau)** parameter required by `DB.ishm(...)` (required).  
+- **`-tau, --tau`**: The **τ (tau)** parameter required by `DB.db(...)` (required).  
 
 **Example Usage:**
 ```bash
