@@ -156,6 +156,7 @@ cp makefile.suite makefile
 make
 ./dbgen -s 1 -T O   # orders.tbl
 ./dbgen -s 1 -T L   # lineitem.tbl
+```
 
 #### **TPCH Order**
 - Use the file `orders.tbl`
