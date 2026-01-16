@@ -13,7 +13,7 @@ This repository (or folder) contains the experimental setup and official impleme
 - `Naive/` — Implementation of the naive global-bound baseline.
 - `downstream/` — Downstream DP mechanisms for Count/Sum/Max queries.
 - `datasets/` — All datasets used in experiments (real-world and synthetic).
-- `datasets/real-world/` — Real-world datasets and their processed versions.
+- `datasets/real-world/` — Preprocessed versions of the real-world datasets.
 - `datasets/Synthetic/` — Synthetic datasets.
 - `dataset_generator.py` — Script for generating synthetic datasets.
 - `privacy_generator.py` — Script for generating privacy specifications for datasets.
