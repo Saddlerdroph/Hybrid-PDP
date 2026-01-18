@@ -202,7 +202,7 @@ This script generates **synthetic privacy specifications** for a given dataset b
 
 - **`--check`**: Exponent lower bound check used in clipping; lower clip value is 2^check (default: -20).
 
-- **`-hat`** Exponent upper bound hat used in clipping; upper clip value is 2^hat (default: 4).
+- **`--hat`** Exponent upper bound hat used in clipping; upper clip value is 2^hat (default: 4).
 
 - **`--type`**: Post-transform mode — choose from normal, linear, sqrt (default: normal).
 
