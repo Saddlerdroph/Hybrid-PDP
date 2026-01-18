@@ -197,7 +197,7 @@ Run:
 ```bash
 python privacy_generator.py
 ```
-This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt`.
+This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`.  
 
 #### Description of Main Parameters
 
@@ -245,7 +245,7 @@ This script integrates and invokes `ISHM.py`: the algorithm of the general frame
 
 **Example Usage:**
 ```bash
-python Framework/run.py datasets/Synthetic/TPCH Lineitem/data.csv -r 50 -beta 0.05 -q sum
+python Framework/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
 ```
 ---
 
@@ -265,7 +265,7 @@ This script integrates and invokes `strawman.py`: the algorithm of the strawman 
 
 **Example Usage:**
 ```bash
-python Naive/run.py datasets/real-world/preprocessed/Guassian/University/data.csv -r 50 -beta 0.05 -q sum
+python Naive/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
 ```
 ---
 
@@ -286,7 +286,7 @@ This script integrates and invokes `PT.py`: the algorithm of *prefix-truncation*
 
 **Example Usage:**
 ```bash
-python Prefix/run.py datasets/real-world/preprocessed/Guassian/University/data.csv -r 50 -beta 0.05 -q sum
+python Prefix/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
 ```
 ---
 ### 6. Running doubly-truncation baseline
@@ -305,7 +305,7 @@ This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation*
 
 **Example Usage:**
 ```bash
-python Doubly/run.py datasets/real-world/preprocessed/Guassian/University/data.csv -r 50 -beta 0.05 -q sum --tau 0.05
+python Doubly/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum --tau 0.05
 ```
 ---
 
