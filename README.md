@@ -12,7 +12,7 @@ This repository (or folder) contains the experimental setup and official impleme
 - `Prefix/` — Implementation of the prefix-truncation baseline.
 - `Naive/` — Implementation of the naive global-bound baseline.
 - `downstream/` — Downstream DP mechanisms for Count/Sum/Max queries.
-- `datasets/` — Datasets used in experiments (real-world and synthetic).
+- `datasets/` — Datasets used in experiments.
 - `dataset_generator.py` — Script for generating synthetic datasets.
 - `privacy_generator.py` — Script for generating privacy specifications for datasets.
 
@@ -196,7 +196,7 @@ Run:
 ```bash
 python privacy_generator.py
 ```
-This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`.  
+This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. 
 
 #### Description of Main Parameters
 
@@ -207,9 +207,6 @@ This script generates **synthetic privacy specifications** for a given dataset b
 - **`--mean`**: Mean of Gaussian noise (default: 0.0).
 
 - **`--std`**: Standard deviation of Gaussian noise (must be >= 0) (default: 0.5).
-
-- **`--seed`**: Random seed for repro---
-python3 gen_data.py --n 100000 --out synthetic.csvducibility (default: None, meaning non-deterministic).
 
 - **`--check`**: Exponent lower bound check used in clipping; lower clip value is 2^check (default: -20).
 
