@@ -188,7 +188,7 @@ python dataset_generator.py --n 100000 --out data.csv --lamda 8
 
 ### 2.Generating privacy specification
 
-This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. For our experiments in this work, you can generate the corresponding **user privacy mapping** file or **record privacy mapping** file based on the input parameters. Note that when generating a **user privacy mapping**, only the `normal` type is supported—this matches the setting used in our work.
+This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id, privacy_budget`. For our experiments in this work, you can generate the corresponding **user privacy mapping** file or **record privacy mapping** file based on the input parameters. Note that when generating a **user privacy mapping**, only the `normal` type is supported—this matches the setting used in our work.
 
 #### Description of Main Parameters
 
@@ -219,7 +219,7 @@ python privacy_generator.py -i ./data.csv --type sqrt --scale -10
 
 This script integrates and invokes `ISHM.py`: the algorithm of the general framework proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.  
 - **`-r, --rounds`**: Number of times to run `ISHM.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -235,7 +235,7 @@ python Framework/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 
 
 This script integrates and invokes `strawman.py`: the algorithm of the strawman baseline in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.  
 - **`-r, --rounds`**: Number of times to run `strawman.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -252,7 +252,7 @@ python Naive/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05
 
 This script integrates and invokes `PT.py`: the algorithm of *prefix-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.  
 - **`-r, --rounds`**: Number of times to run  `PT.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -267,7 +267,7 @@ python Prefix/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 
 This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.  
 - **`-r, --rounds`**: Number of times to run  `DT.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -283,8 +283,8 @@ python Doubly/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 
 > **Note:**  
 > **Dataset-side files required by framework and baselines (placed in the same directory as `dataset_file`):**  
-> - **`record.csv`**: A mapping file with two columns: `record_id record_privacy_budget`.  
-> - **`user.csv`**: A mapping file with two columns: `user_id user_privacy_budget`.  
+> - **`record.csv`**: A mapping file with two columns: `record_id, record_privacy_budget`.  
+> - **`user.csv`**: A mapping file with two columns: `user_id, user_privacy_budget`.  
 >  
 > **Execution notes:**  
 > - For **`sum`** and **`max`**, `record_value` must be numeric (parseable as `float`); otherwise the script will raise an error.  
