@@ -151,10 +151,6 @@ Due to copyright restrictions, I am unable to provide the files of real-world da
 
 ### 1.Generating synthetic datasets
 
-Run:
-```bash
-python dataset_generator.py
-```
 This script generates a synthetic dataset with configurable scale parameters: record values are sampled from a Gaussian distribution, and the number of records per user is sampled from a Poisson distribution.
 
 #### Description of Main Parameters
@@ -192,10 +188,6 @@ python dataset_generator.py --n 100000 --out data.csv --lamda 8
 
 ### 2.Generating privacy specification
 
-Run:
-```bash
-python privacy_generator.py
-```
 This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. For our experiments in this work, you can generate the corresponding **user privacy mapping** file or **record privacy mapping** file based on the input parameters. Note that when generating a **user privacy mapping**, only the `normal` type is supported—this matches the setting used in our paper.
 
 #### Description of Main Parameters
@@ -225,10 +217,6 @@ python privacy_generator.py -i ./data.csv --type sqrt --scale -10
 
 ### 3. Running our framework
 
-Run:
-```bash
-python Framework/run.py
-```
 This script integrates and invokes `ISHM.py`: the algorithm of the general framework proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
 - **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
@@ -245,10 +233,6 @@ python Framework/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 
 
 ### 4. Running naive global-bound baseline
 
-Run:
-```bash
-python Naive/run.py
-```
 This script integrates and invokes `strawman.py`: the algorithm of the strawman baseline in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
 - **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
@@ -266,10 +250,6 @@ python Naive/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05
 
 ### 5. Running prefix-truncation baseline
 
-Run:
-```bash
-python Prefix/run.py
-```
 This script integrates and invokes `PT.py`: the algorithm of *prefix-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
 - **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
@@ -285,10 +265,6 @@ python Prefix/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 ---
 ### 6. Running doubly-truncation baseline
 
-Run:
-```bash
-python Doubly/run.py
-```
 This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
 - **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
