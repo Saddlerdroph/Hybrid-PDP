@@ -1,7 +1,7 @@
 # Hybrid-PDP: Simultaneously Enforcing both Record-level and User-level Personalized Differential Privacy
 
 ## Overview
-This repository (or folder) contains the experimental setup and official implementation of our proposed framework under **Hybrid-PDP**. It includes modules for count, sum and  max, as well as supporting utilities for error analysis.
+This repository (or folder) contains the experimental setup and official implementation of our proposed framework under **Hybrid-PDP**. It includes modules for count, sum and max, as well as supporting utilities for error analysis.
 
 ---
 
