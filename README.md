@@ -148,8 +148,6 @@ Due to copyright restrictions, I am unable to provide the files of real-world da
 ---
 
 ## Reproduce the Experiments
-This script generates a synthetic dataset with configurable scale parameters: record values are sampled from a Gaussian distribution, and the number of records per user is sampled from a Poisson distribution.
-
 
 ### 1.Generating synthetic datasets
 
@@ -157,6 +155,8 @@ Run:
 ```bash
 python dataset_generator.py
 ```
+This script generates a synthetic dataset with configurable scale parameters: record values are sampled from a Gaussian distribution, and the number of records per user is sampled from a Poisson distribution.
+
 #### Description of Main Parameters
 
 - **`--n`** (required): Total number of records (rows) to generate.
@@ -196,7 +196,7 @@ Run:
 ```bash
 python privacy_generator.py
 ```
-This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. 
+This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. For our experiments in this work, you can generate the corresponding **user privacy mapping** file or **record privacy mapping** file based on the input parameters. Note that when generating a **user privacy mapping**, only the `normal` type is supported—this matches the setting used in our paper.
 
 #### Description of Main Parameters
 
@@ -221,8 +221,6 @@ This script generates **synthetic privacy specifications** for a given dataset b
 python privacy_generator.py -i ./data.csv --type sqrt --scale -10 
 ```
 ---
-
-
 
 
 ### 3. Running our framework
@@ -253,7 +251,7 @@ python Naive/run.py
 ```
 This script integrates and invokes `strawman.py`: the algorithm of the strawman baseline in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id record_value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
 - **`-r, --rounds`**: Number of times to run `strawman.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
