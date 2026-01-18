@@ -188,7 +188,7 @@ python dataset_generator.py --n 100000 --out data.csv --lamda 8
 
 ### 2.Generating privacy specification
 
-This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. For our experiments in this work, you can generate the corresponding **user privacy mapping** file or **record privacy mapping** file based on the input parameters. Note that when generating a **user privacy mapping**, only the `normal` type is supported—this matches the setting used in our paper.
+This script generates **synthetic privacy specifications** for a given dataset by sampling Gaussian noise and converting it into values via `2^noise`. It supports three specification types — `normal`, `linear`, and `sqrt` to generate a mapping file with two columns: `id privacy_budget`. For our experiments in this work, you can generate the corresponding **user privacy mapping** file or **record privacy mapping** file based on the input parameters. Note that when generating a **user privacy mapping**, only the `normal` type is supported—this matches the setting used in our work.
 
 #### Description of Main Parameters
 
@@ -282,7 +282,7 @@ python Doubly/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 
 
 > **Note:**  
-> **Dataset-side required files (placed in the same directory as `dataset_file`):**  
+> **Dataset-side files required by framework and baselines (placed in the same directory as `dataset_file`):**  
 > - **`record.csv`**: A mapping file with two columns: `record_id record_privacy_budget`.  
 > - **`user.csv`**: A mapping file with two columns: `user_id user_privacy_budget`.  
 >  
