@@ -1,7 +1,7 @@
 # Hybrid-PDP: Simultaneously Enforcing both Record-level and User-level Personalized Differential Privacy
 
 ## Overview
-This repository (or folder) contains the experimental setup and official implementation of our proposed framework under **Hybrid-PDP**. It include modules for count, summation and  maximum estimation, as well as supporting utilities for error analysis.
+This repository (or folder) contains the experimental setup and official implementation of our proposed framework under **Hybrid-PDP**. It includes modules for count, summation and  maximum estimation, as well as supporting utilities for error analysis.
 
 ---
 
@@ -13,7 +13,6 @@ This repository (or folder) contains the experimental setup and official impleme
 - `Naive/` — Implementation of the naive global-bound baseline.
 - `downstream/` — Downstream DP mechanisms for Count/Sum/Max queries.
 - `datasets/` — All datasets used in experiments (real-world and synthetic).
-- `datasets/real-world/` — real-world datasets.
 - `datasets/Synthetic/` — Synthetic datasets.
 - `dataset_generator.py` — Script for generating synthetic datasets.
 - `privacy_generator.py` — Script for generating privacy specifications for datasets.
@@ -31,7 +30,7 @@ pip install -r requirements.txt
 ```
 ---
 ## Dataset Acquisition and Preprocessing
-Due to copyright restrictions, I am unable to provide the raw files of of real-world dataset. However, I will provide the access link as well as the preprocessing procedures. Each dataset have 3 columns named `record_id`, `user_id` and `value`.
+Due to copyright restrictions, I am unable to provide the files of real-world dataset. However, I will provide the access link as well as the preprocessing procedures.
 
 ### **CK Pay**
 
@@ -149,7 +148,7 @@ Due to copyright restrictions, I am unable to provide the raw files of of real-w
 
 ---
 
-## Reprodue the Experiments
+## Reproduce the Experiments
 This script generates a synthetic dataset with configurable scale parameters: record values are sampled from a Gaussian distribution, and the number of records per user is sampled from a Poisson distribution.
 
 
@@ -238,7 +237,7 @@ python Framework/run.py
 ```
 This script integrates and invokes `ISHM.py`: the algorithm of the general framework proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id record_value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
 - **`-r, --rounds`**: Number of times to run `ISHM.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -246,7 +245,7 @@ This script integrates and invokes `ISHM.py`: the algorithm of the general frame
 
 **Example Usage:**
 ```bash
-python Framework/run.py datasets/real-world/preprocessed/Guassian/University/data.csv -r 50 -beta 0.05 -q sum
+python Framework/run.py datasets/Synthetic/TPCH Lineitem/data.csv -r 50 -beta 0.05 -q sum
 ```
 ---
 
@@ -279,7 +278,7 @@ python Prefix/run.py
 ```
 This script integrates and invokes `PT.py`: the algorithm of *prefix-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id record_value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
 - **`-r, --rounds`**: Number of times to run  `PT.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -298,7 +297,7 @@ python Doubly/run.py
 ```
 This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
-- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id record_value`.  
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id user_id value`.  
 - **`-r, --rounds`**: Number of times to run  `DT.py` for repeated trials and statistical summarization (default: `1`).  
 - **`-beta, --beta`**: Failure probability parameter β used by algorithm (must satisfy `0 < beta < 1`) (default: `0.1`).  
 - **`-q, --query`**: Downstream query type to execute — choose from `count`, `sum`, or `max` (default: `count`).  
@@ -306,7 +305,7 @@ This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation*
 
 **Example Usage:**
 ```bash
-python Doubly/run.py datasets/real-world/preprocessed/Guassian/University/data.csv -r 50 -beta 0.05 -q sum
+python Doubly/run.py datasets/real-world/preprocessed/Guassian/University/data.csv -r 50 -beta 0.05 -q sum --tau 0.05
 ```
 ---
 
