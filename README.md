@@ -1,7 +1,7 @@
 # Hybrid-PDP: Simultaneously Enforcing both Record-level and User-level Personalized Differential Privacy
 
 ## Overview
-This repository (or folder) contains the experimental setup and official implementation of our proposed framework under **Hybrid-PDP**. It includes modules for count, summation and  maximum estimation, as well as supporting utilities for error analysis.
+This repository (or folder) contains the experimental setup and official implementation of our proposed framework under **Hybrid-PDP**. It includes modules for count, sum and  max, as well as supporting utilities for error analysis.
 
 ---
 
@@ -29,7 +29,7 @@ pip install -r requirements.txt
 ```
 ---
 ## Dataset Acquisition and Preprocessing
-Due to copyright restrictions, I am unable to provide the files of real-world dataset. However, I will provide the access link as well as the preprocessing procedures.
+Due to copyright restrictions, I am unable to provide the files of real-world datasets. However, I will provide the access link as well as the preprocessing procedures.
 
 ### **CK Pay**
 
@@ -202,7 +202,7 @@ This script generates **synthetic privacy specifications** for a given dataset b
 
 - **`--check`**: Exponent lower bound check used in clipping; lower clip value is 2^check (default: -20).
 
-- **`--hat`** Exponent upper bound hat used in clipping; upper clip value is 2^hat (default: 4).
+- **`--hat`**: Exponent upper bound hat used in clipping; upper clip value is 2^hat (default: 4).
 
 - **`--type`**: Post-transform mode — choose from normal, linear, sqrt (default: normal).
 
