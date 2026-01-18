@@ -12,8 +12,7 @@ This repository (or folder) contains the experimental setup and official impleme
 - `Prefix/` — Implementation of the prefix-truncation baseline.
 - `Naive/` — Implementation of the naive global-bound baseline.
 - `downstream/` — Downstream DP mechanisms for Count/Sum/Max queries.
-- `datasets/` — All datasets used in experiments (real-world and synthetic).
-- `datasets/Synthetic/` — Synthetic datasets.
+- `datasets/` — Datasets used in experiments (real-world and synthetic).
 - `dataset_generator.py` — Script for generating synthetic datasets.
 - `privacy_generator.py` — Script for generating privacy specifications for datasets.
 
