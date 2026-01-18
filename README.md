@@ -157,7 +157,7 @@ This script generates a synthetic dataset with configurable scale parameters: re
 
 Run:
 ```bash
-python privacy_generator.py
+python dataset_generator.py
 ```
 #### Description of Main Parameters
 
