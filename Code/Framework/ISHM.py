@@ -18,6 +18,7 @@ import numpy as np
 TAU_LOWER: float = 2 ** (-26)
 # Maximum tau (upper search / constraint bound)
 TAU_UPPER: float = 16
+ 
 
 
 # Type aliases
@@ -170,6 +171,7 @@ def threshold_selection(structure: Structure, beta: float) -> float:
     
     beta = float(beta)
     beta = min(max(beta, 1e-12), 0.999999999999)
+    ell = math.log2(TAU_UPPER/TAU_LOWER)+1
 
     taus = _iter_tau_grid()
     if not taus:
@@ -183,9 +185,9 @@ def threshold_selection(structure: Structure, beta: float) -> float:
 
     # Sample noise per tau in order (keeps serial behavior)
     for count, tau in zip(counts, taus):
-        b = 4.0 / float(tau)
+        b = 2.0 * ell / float(tau)
         noise = float(np.random.laplace(loc=0.0, scale=b))
-        C = 3.0 * b * math.log(10.0 / beta)
+        C = 3.0 * b * math.log(ell / beta)
         score = float(count) + noise - C
 
         if score >= maxscore:
