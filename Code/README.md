@@ -72,7 +72,7 @@ Due to copyright restrictions, I am unable to provide the files of real-world da
    - `user_id` should start from **1** and increase sequentially across unique combinations of these fields.
 
 3. **value**
-   - Take the **salary** field.
+   - Take the **Base Annualized Salary** field.
    - Round it to the nearest integer.
    - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
 
