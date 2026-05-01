@@ -129,7 +129,7 @@ Due to copyright restrictions, I am unable to provide the files of real-world da
 
 **Access**
 - Download the dataset from: https://www.kaggle.com/datasets/marceloventura/the-berka-dataset
-- Use the file **trans_comma.csv**
+- Use the file **trans.csv**
 
 **Preprocessing**
 1. **record_id**
