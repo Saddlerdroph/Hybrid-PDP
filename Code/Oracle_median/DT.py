@@ -24,34 +24,6 @@ RecordsDict = Dict[str, Tuple[Any, float]]
 Structure = Tuple[UsersDict, RecordsDict]
 
 
-def doubly_truncation_compute(structure: Structure, tau: float) -> int:
-    """Count records retained at ``tau``."""
-    users, records = structure
-    tau = float(tau)
-    if tau <= 0:
-        raise ValueError("tau must be > 0")
-
-    total = 0
-    for _uid, (user_budget, user_record_ids) in users.items():
-        maxcount = int(math.floor(float(user_budget) / tau)) if user_budget is not None else 0
-        if maxcount <= 0:
-            continue
-
-        c = 0
-        for rid in user_record_ids:
-            if c >= maxcount:
-                break
-            rec = records.get(rid)
-            if rec is None:
-                continue
-            _val, record_budget = rec
-            if float(record_budget) >= tau:
-                c += 1
-
-        total += c
-
-    return total
-
 
 def doubly_truncation_final(structure: Structure, best_tau: float) -> List[Any]:
     """Return values retained at ``best_tau``."""
