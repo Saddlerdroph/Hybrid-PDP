@@ -11,6 +11,10 @@ This repository (or folder) contains the experimental setup and official impleme
 - `Doubly/` — Implementation of the doubly-truncation baseline.
 - `Prefix/` — Implementation of the prefix-truncation baseline.
 - `Naive/` — Implementation of the naive global-bound baseline.
+- `Oracle_mean/` — Implementation of the Oracle-mean baseline.
+- `Oracle_median/` — Implementation of the Oracle-median baseline.
+- `Folded/` — Implementation of the Folded baseline.
+- `Folded_sum/` — Implementation of the Folded-sum baseline.
 - `downstream/` — Downstream DP mechanisms for Count/Sum/Max queries.
 - `datasets/` — Datasets used in experiments.
 - `dataset_generator.py` — Script for generating synthetic datasets.
@@ -147,6 +151,29 @@ Due to copyright restrictions, I am unable to provide the files of real-world da
 
 ---
 
+
+### **IBM**
+
+**Access**
+- Download the dataset from: https://github.com/IBM/AMLSim/wiki/Download-Example-Data-Set
+- Use the file **data/bank_mixed/transactions.csv.gz** in v2.1
+
+**Preprocessing**
+1. **record_id**
+   - Assign each row a unique `record_id`, starting from **1** and increasing sequentially.
+
+2. **user_id**
+   - Use the **`orig_acct`** field to define users.
+   - Reassign `user_id` starting from **1**, increasing sequentially across unique `account_id` values.
+   - Rows with the same `orig_acct` must share the same `user_id`.
+
+3. **value**
+   - Take the **`base_amt`** field as `value`.
+   - Round it to the nearest integer.
+   - Truncate the result so that the minimum value is **0** (i.e., negative values become 0).
+
+---
+
 ## Reproduce the Experiments
 
 ### 1.Generating synthetic datasets
@@ -263,7 +290,67 @@ This script integrates and invokes `PT.py`: the algorithm of *prefix-truncation*
 python Prefix/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
 ```
 ---
-### 6. Running doubly-truncation baseline
+
+### 6. Running Oracle-mean baseline
+
+This script integrates and invokes `DT.py`: the Oracle-mean baseline for executing three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also collects, summarizes, and reports utility and efficiency statistics across repeated trials.
+#### Description of Main Parameters
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.
+- **`-r, --rounds`**: Number of Oracle-mean trials (default: `1`).
+- **`-beta, --beta`**: Failure probability parameter β (must satisfy `0 < beta < 1`) (default: `0.1`).
+- **`-q, --query`**: Downstream query type — choose from `count`, `sum`, or `max` (default: `count`).
+
+**Example Usage:**
+```bash
+python Oracle_mean/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
+```
+---
+
+### 7. Running Oracle-median baseline
+
+This script integrates and invokes `DT.py`: the Oracle-median baseline for executing three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also collects, summarizes, and reports utility and efficiency statistics across repeated trials.
+#### Description of Main Parameters
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.
+- **`-r, --rounds`**: Number of Oracle-median trials (default: `1`).
+- **`-beta, --beta`**: Failure probability parameter β (must satisfy `0 < beta < 1`) (default: `0.1`).
+- **`-q, --query`**: Downstream query type — choose from `count`, `sum`, or `max` (default: `count`).
+
+**Example Usage:**
+```bash
+python Oracle_median/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
+```
+---
+
+### 8. Running Folded baseline
+
+This script integrates and invokes `FD.py`: the Folded baseline for executing three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also collects, summarizes, and reports utility and efficiency statistics across repeated trials.
+#### Description of Main Parameters
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.
+- **`-r, --rounds`**: Number of Folded trials (default: `1`).
+- **`-beta, --beta`**: Failure probability parameter β (must satisfy `0 < beta < 1`) (default: `0.1`).
+- **`-q, --query`**: Downstream query type — choose from `count`, `sum`, or `max` (default: `count`).
+
+**Example Usage:**
+```bash
+python Folded/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05 -q sum
+```
+---
+
+### 9. Running Folded-sum baseline
+
+This script integrates and invokes `FD.py`: the Folded-sum baseline for executing the *sum* query under Hybrid-PDP. It also collects, summarizes, and reports utility and efficiency statistics across repeated trials.
+#### Description of Main Parameters
+- **`dataset_file`**: Path to the input dataset file. Each non-empty, non-comment line should contain `record_id, user_id, value`.
+- **`-r, --rounds`**: Number of Folded-sum trials (default: `1`).
+- **`-beta, --beta`**: Failure probability parameter β (must satisfy `0 < beta < 1`) (default: `0.1`).
+
+**Example Usage:**
+```bash
+python Folded_sum/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05
+```
+---
+
+### 10. Running doubly-truncation baseline
 
 This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
@@ -292,7 +379,7 @@ python Doubly/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 >  
 > **Implementation notes:**  
 > - Our downstream implementations for the **`sum`** and **`max`** queries follow the algorithmic descriptions in **[1]**.  
-> - Our implementation of the **prefix-truncation** baseline follows the algorithmic descriptions in **[2]**.  
+> - Our implementation of the **prefix-truncation** baseline and **Folded** follows the algorithmic descriptions in **[2]**.  
 > - Since real-world datasets come in different formats and the preprocessing pipelines are not unified (with non-trivial requirements), please refer to the **Appendix** of our paper for the detailed preprocessing procedure.  
 >
 > **Reference:**  
