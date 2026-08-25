@@ -180,7 +180,7 @@ def main() -> None:
     # CLI: dataset path + Oracle-mean parameters
     parser = argparse.ArgumentParser()
     parser.add_argument("dataset_file", help="Path to dataset_file (record_id user_id record_value per line)")
-    parser.add_argument("-r", "--rounds", type=int, default=1, help="Number of Oracle-mean rounds to run")
+    parser.add_argument("-r", "--rounds", type=int, default=1, help="Number of Oracle-median rounds to run")
     parser.add_argument("-beta", "--beta", type=float, default=0.1, help="Failure rate beta (0<beta<1)")
     parser.add_argument(
         "-q", "--query",
