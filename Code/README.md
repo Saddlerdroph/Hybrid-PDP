@@ -381,7 +381,7 @@ python Doubly/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 > - Our downstream implementations for the **`sum`** and **`max`** queries follow the algorithmic descriptions in **[1]**.  
 > - Our implementation of the **Prefix** baseline and **Folded** follows the algorithmic descriptions in **[2]**.  
 > - Since real-world datasets come in different formats and the preprocessing pipelines are not unified (with non-trivial requirements), please refer to the **Appendix** of our paper for the detailed preprocessing procedure.
-> - To make **Oracle-mean** and **Oracle-median** more competitive, we restrict the sampling range of the random threshold τ to [2^{-10},2^{0}], which covers well-performing thresholds for most evaluated datasets. Instead of sampling from the entire feasible range of thresholds, this restriction makes the oracle more likely to sample thresholds that achieve high utility.
+> - To make **Oracle-mean** and **Oracle-median** more competitive, we restrict the sampling range of the random threshold τ to [2^{-10},2^{0}], which more precisely targets the range of well-performing thresholds for most evaluated datasets. Instead of sampling from the entire feasible range of thresholds, this restriction makes the oracle more likely to sample thresholds that achieve high utility.
 
 >
 > **Reference:**  
