@@ -9,8 +9,8 @@ This repository (or folder) contains the experimental setup and official impleme
 
 - `Framework/` — Main implementation of the proposed Hybrid-PDP framework.
 - `Doubly/` — Implementation of the doubly-truncation baseline.
-- `Prefix/` — Implementation of the prefix-truncation baseline.
-- `Naive/` — Implementation of the naive global-bound baseline.
+- `Prefix/` — Implementation of the Prefix baseline.
+- `Naive/` — Implementation of the Naive baseline.
 - `Oracle_mean/` — Implementation of the Oracle-mean baseline.
 - `Oracle_median/` — Implementation of the Oracle-median baseline.
 - `Folded/` — Implementation of the Folded baseline.
@@ -258,7 +258,7 @@ python Framework/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 
 ```
 ---
 
-### 4. Running naive global-bound baseline
+### 4. Running Naive global-bound baseline
 
 This script integrates and invokes `strawman.py`: the algorithm of the strawman baseline in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
@@ -275,7 +275,7 @@ python Naive/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.05
 ---
 
 
-### 5. Running prefix-truncation baseline
+### 5. Running Prefix baseline
 
 This script integrates and invokes `PT.py`: the algorithm of *prefix-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
@@ -350,7 +350,7 @@ python Folded_sum/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta
 ```
 ---
 
-### 10. Running doubly-truncation baseline
+### 10. Running Doubly-truncation baseline
 
 This script integrates and invokes `DT.py`: the algorithm of *doubly-truncation* proposed in our paper to execute three optional queries (*count*, *sum*, and *max*) under Hybrid-PDP. It also provides functionality to collect, summarize, and report utility and efficiency statistics of the algorithm's execution results.
 #### Description of Main Parameters
@@ -379,8 +379,10 @@ python Doubly/run.py "datasets/Synthetic/TPCH Lineitem/data.csv" -r 50 -beta 0.0
 >  
 > **Implementation notes:**  
 > - Our downstream implementations for the **`sum`** and **`max`** queries follow the algorithmic descriptions in **[1]**.  
-> - Our implementation of the **prefix-truncation** baseline and **Folded** follows the algorithmic descriptions in **[2]**.  
-> - Since real-world datasets come in different formats and the preprocessing pipelines are not unified (with non-trivial requirements), please refer to the **Appendix** of our paper for the detailed preprocessing procedure.  
+> - Our implementation of the **Prefix** baseline and **Folded** follows the algorithmic descriptions in **[2]**.  
+> - Since real-world datasets come in different formats and the preprocessing pipelines are not unified (with non-trivial requirements), please refer to the **Appendix** of our paper for the detailed preprocessing procedure.
+> - To make **Oracle-mean** and **Oracle-median** more competitive, we restrict the sampling range of the random threshold τ to [2^{-10},2^{0}], which covers well-performing thresholds for most evaluated datasets. Instead of sampling from the entire feasible range of thresholds, this restriction makes the oracle more likely to sample thresholds that achieve high utility.
+
 >
 > **Reference:**  
 > [1] Wei Dong and Ke Yi. *Universal Private Estimators.* In *Proceedings of the 42nd ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems (PODS)*, pages 195–206, 2023.  
