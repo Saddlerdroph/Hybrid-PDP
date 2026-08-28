@@ -11,10 +11,10 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
-
-# Search bounds.
 TAU_LOWER: float = 2**(-26)
 TAU_UPPER: float = 16
+
+# Search bounds.
 ADP_LOWER: float = 2**(-10)
 ADP_UPPER: float = 1
 
